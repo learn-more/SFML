@@ -22,7 +22,9 @@ endif()
 # Find Python and run-clang-tidy script
 find_package(Python 3 REQUIRED)
 
-find_program(RUN_CLANG_TIDY run-clang-tidy)
+get_filename_component(CLANG_TIDY_FOLDER ${CLANG_TIDY_EXECUTABLE} DIRECTORY)
+
+find_program(RUN_CLANG_TIDY run-clang-tidy HINTS ${CLANG_TIDY_FOLDER})
 if(NOT RUN_CLANG_TIDY)
     message(FATAL_ERROR "Failed to find run-clang-tidy script")
 endif()
